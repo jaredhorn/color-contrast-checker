@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="UNT Dallas palette swatches shown with four text-color combinations and WCAG AA contrast results.">
+  <title>UNT Dallas Palette Contrast Matrix</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23003882'/%3E%3Cpath d='M7 16h18M16 7v18' stroke='%23F2CD00' stroke-width='5'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap">
+  <style>
+    :root {
+      --blue-900: #003882;
+      --blue-700: #1F4F9E;
+      --blue-500: #426BBA;
+      --blue-300: #9FB6E6;
+      --blue-100: #E6EDFA;
+      --yellow-400: #F2CD00;
+      --gold-500: #C1A571;
+      --gold-300: #F6DE6B;
+      --gold-100: #FBF4D1;
+      --teal-500: #6AA6A1;
+      --teal-200: #D6ECE9;
+      --coral-500: #E65F4A;
+      --neutral-900: #1A1A1A;
+      --neutral-700: #4A4A4A;
+      --neutral-500: #707070;
+      --neutral-300: #D6D6D6;
+      --neutral-100: #F5F5F5;
+      --white: #FFFFFF;
+      --black: #000000;
+      --fail-red: rgba(214, 24, 24, .72);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { color-scheme: light; }
+
+    body {
+      margin: 0;
+      background: var(--neutral-100);
+      color: var(--neutral-900);
+      font-family: Roboto, Helvetica, sans-serif;
+      line-height: 1.45;
+    }
+
+    .page-header {
+      padding: clamp(1.5rem, 4vw, 3.5rem) clamp(1rem, 4vw, 4rem);
+      background: var(--blue-900);
+      border-bottom: .5rem solid var(--yellow-400);
+      color: var(--white);
+    }
+
+    .page-header h1 {
+      max-width: 18ch;
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 4.75rem);
+      line-height: .96;
+      letter-spacing: -.045em;
+      text-transform: uppercase;
+    }
+
+    .page-header p {
+      max-width: 52rem;
+      margin: 1rem 0 0;
+      font-size: 1rem;
+    }
+
+    main {
+      width: min(96rem, 100%);
+      margin: 0 auto;
+      padding: clamp(1.5rem, 4vw, 4rem) clamp(1rem, 3vw, 3rem) 5rem;
+    }
+
+    .matrix-nav {
+      margin-bottom: 1.25rem;
+      padding: 1rem;
+      background: var(--white);
+      border: 1px solid var(--neutral-300);
+    }
+
+    .matrix-nav h2 {
+      margin: 0 0 .75rem;
+      color: var(--blue-900);
+      font-size: 1.05rem;
+      text-transform: uppercase;
+    }
+
+    .jump-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: .55rem;
+    }
+
+    .jump-group + .jump-group { margin-top: .65rem; }
+
+    .jump-label {
+      min-width: 7rem;
+      font-size: .85rem;
+      font-weight: 800;
+    }
+
+    .jump-link {
+      display: inline-block;
+      padding: .5rem .72rem;
+      background: var(--blue-900);
+      border: 2px solid var(--blue-900);
+      border-radius: .2rem;
+      color: var(--white);
+      font-size: .82rem;
+      font-weight: 800;
+      line-height: 1;
+      text-decoration: none;
+    }
+
+    .jump-link:hover,
+    .jump-link:focus-visible {
+      background: var(--yellow-400);
+      color: var(--blue-900);
+      outline: none;
+    }
+
+    .legend {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      width: fit-content;
+      margin: 0 0 2rem;
+      padding: .75rem 1rem;
+      background: var(--white);
+      border: 1px solid var(--neutral-300);
+      border-left: .45rem solid #D61818;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    .legend-mark {
+      color: #B00000;
+      font-size: 1.75rem;
+      line-height: 1;
+    }
+
+    .matrix-group + .matrix-group { margin-top: 5rem; }
+
+    .group-heading {
+      margin: 0 0 1.5rem;
+      color: var(--blue-900);
+      font-size: clamp(1.75rem, 3vw, 3rem);
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .group-heading small {
+      display: block;
+      margin-top: .5rem;
+      color: var(--neutral-700);
+      font-size: .9rem;
+      font-weight: 700;
+      letter-spacing: 0;
+      line-height: 1.4;
+      text-transform: none;
+    }
+
+    .text-section { scroll-margin-top: 1rem; }
+    .text-section + .text-section { margin-top: 4rem; }
+
+    .section-heading {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: .65rem 1rem;
+      margin-bottom: 1rem;
+      padding-bottom: .65rem;
+      border-bottom: 3px solid var(--blue-900);
+    }
+
+    .section-heading h3 {
+      margin: 0;
+      color: var(--blue-900);
+      font-size: clamp(1.45rem, 2.5vw, 2.25rem);
+      letter-spacing: -.025em;
+      text-transform: uppercase;
+    }
+
+    .text-chip {
+      padding: .2rem .55rem;
+      border: 1px solid var(--neutral-300);
+      background: var(--white);
+      color: var(--neutral-900);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .85rem;
+      font-weight: 700;
+    }
+
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: .85rem;
+    }
+
+    .swatch {
+      position: relative;
+      isolation: isolate;
+      display: grid;
+      min-height: 150px;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid rgba(0, 56, 130, .2);
+      border-radius: .35rem;
+      text-align: center;
+    }
+
+    .swatch-content {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      gap: .25rem;
+      padding: 1rem;
+      text-shadow: 0 0 1px rgba(128,128,128,.08);
+    }
+
+    .swatch-name {
+      font-size: 1.05rem;
+      font-weight: 800;
+    }
+
+    .swatch-hex {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .9rem;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+
+    .swatch.title-text .swatch-name {
+      font-size: 1.5rem;
+      line-height: 1.08;
+    }
+
+    .swatch.title-text .swatch-hex { font-size: 1rem; }
+
+    .swatch.fail::before,
+    .swatch.fail::after {
+      position: absolute;
+      z-index: 3;
+      width: 125%;
+      height: 12px;
+      content: "";
+      background: var(--fail-red);
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, .35);
+      pointer-events: none;
+    }
+
+    .swatch.fail::before { transform: rotate(32deg); }
+    .swatch.fail::after { transform: rotate(-32deg); }
+
+    .status {
+      position: absolute;
+      z-index: 4;
+      right: .45rem;
+      bottom: .4rem;
+      padding: .16rem .38rem;
+      border-radius: .2rem;
+      background: rgba(255, 255, 255, .88);
+      color: #800000;
+      font-size: .68rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .swatch.pass .status { display: none; }
+
+    footer {
+      padding: 1.25rem;
+      background: var(--neutral-900);
+      color: var(--white);
+      text-align: center;
+      font-size: .85rem;
+    }
+
+    @media (max-width: 480px) {
+      .swatch-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .swatch { min-height: 126px; }
+      .swatch-name { font-size: .95rem; }
+      .swatch-hex { font-size: .78rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <h1>Palette contrast matrix</h1>
+    <p>Every UNT Dallas palette color shown with four foreground colors. Title combinations use the WCAG 2.1 AA large-text threshold of 3:1; normal text combinations use 4.5:1.</p>
+  </header>
+
+  <main>
+    <nav class="matrix-nav" aria-labelledby="jump-heading">
+      <h2 id="jump-heading">Jump to a matrix</h2>
+      <div class="jump-group">
+        <span class="jump-label">Title text</span>
+        <a class="jump-link" href="#title-white">White</a>
+        <a class="jump-link" href="#title-black">Black</a>
+        <a class="jump-link" href="#title-blue-900">Blue 900</a>
+        <a class="jump-link" href="#title-yellow-400">Yellow 400</a>
+      </div>
+      <div class="jump-group">
+        <span class="jump-label">Normal text</span>
+        <a class="jump-link" href="#normal-white">White</a>
+        <a class="jump-link" href="#normal-black">Black</a>
+        <a class="jump-link" href="#normal-blue-900">Blue 900</a>
+        <a class="jump-link" href="#normal-yellow-400">Yellow 400</a>
+      </div>
+    </nav>
+
+    <div class="legend" aria-label="Contrast failure legend">
+      <span class="legend-mark" aria-hidden="true">✕</span>
+      <span>Red X = contrast ratio below the applicable threshold: 3:1 for title text or 4.5:1 for normal text.</span>
+    </div>
+
+    <div id="matrix"></div>
+  </main>
+
+  <footer>UNT Dallas working color palette · Contrast results are calculated from the displayed hexadecimal values.</footer>
+
+  <script>
+    const palette = [
+      { name: "Blue 900", hex: "#003882" },
+      { name: "Blue 700", hex: "#1F4F9E" },
+      { name: "Blue 500", hex: "#426BBA" },
+      { name: "Blue 300", hex: "#9FB6E6" },
+      { name: "Blue 100", hex: "#E6EDFA" },
+      { name: "Yellow 400", hex: "#F2CD00" },
+      { name: "Gold 500", hex: "#C1A571" },
+      { name: "Gold 300", hex: "#F6DE6B" },
+      { name: "Gold 100", hex: "#FBF4D1" },
+      { name: "Teal 500", hex: "#6AA6A1" },
+      { name: "Teal 200", hex: "#D6ECE9" },
+      { name: "Coral 500", hex: "#E65F4A" },
+      { name: "Neutral 900", hex: "#1A1A1A" },
+      { name: "Neutral 700", hex: "#4A4A4A" },
+      { name: "Neutral 500", hex: "#707070" },
+      { name: "Neutral 300", hex: "#D6D6D6" },
+      { name: "Neutral 100", hex: "#F5F5F5" },
+      { name: "White", hex: "#FFFFFF" }
+    ];
+
+    const foregrounds = [
+      { name: "White text", shortName: "white", hex: "#FFFFFF" },
+      { name: "Black text", shortName: "black", hex: "#000000" },
+      { name: "Blue 900 text", shortName: "blue-900", hex: "#003882" },
+      { name: "Yellow 400 text", shortName: "yellow-400", hex: "#F2CD00" }
+    ];
+
+    const matrixGroups = [
+      {
+        name: "Title text combinations",
+        note: "Large title text: at least 24px regular or about 18.7px bold. Required contrast ratio: 3:1.",
+        id: "title",
+        threshold: 3,
+        swatchClass: "title-text",
+        standardName: "large title text"
+      },
+      {
+        name: "Normal text combinations",
+        note: "Normal-sized text. Required contrast ratio: 4.5:1.",
+        id: "normal",
+        threshold: 4.5,
+        swatchClass: "normal-text",
+        standardName: "normal text"
+      }
+    ];
+
+    function channel(value) {
+      const normalized = value / 255;
+      return normalized <= 0.04045
+        ? normalized / 12.92
+        : Math.pow((normalized + 0.055) / 1.055, 2.4);
+    }
+
+    function luminance(hex) {
+      const values = hex.slice(1).match(/.{2}/g).map((part) => parseInt(part, 16));
+      return (0.2126 * channel(values[0])) + (0.7152 * channel(values[1])) + (0.0722 * channel(values[2]));
+    }
+
+    function contrast(foreground, background) {
+      const a = luminance(foreground);
+      const b = luminance(background);
+      return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+    }
+
+    const matrix = document.getElementById("matrix");
+
+    matrixGroups.forEach((group) => {
+      const groupContainer = document.createElement("div");
+      groupContainer.className = "matrix-group";
+      groupContainer.innerHTML = `<h2 class="group-heading">${group.name}<small>${group.note}</small></h2>`;
+
+      foregrounds.forEach((foreground) => {
+        const sectionId = `${group.id}-${foreground.shortName}`;
+        const section = document.createElement("section");
+        section.id = sectionId;
+        section.className = "text-section";
+        section.setAttribute("aria-labelledby", `${sectionId}-heading`);
+
+        const heading = document.createElement("div");
+        heading.className = "section-heading";
+        heading.innerHTML = `<h3 id="${sectionId}-heading">${foreground.name}</h3><span class="text-chip">${foreground.hex}</span>`;
+
+        const grid = document.createElement("div");
+        grid.className = "swatch-grid";
+
+        palette.forEach((color) => {
+          const ratio = contrast(foreground.hex, color.hex);
+          const passes = ratio >= group.threshold;
+          const swatch = document.createElement("article");
+          swatch.className = `swatch ${group.swatchClass} ${passes ? "pass" : "fail"}`;
+          swatch.style.backgroundColor = color.hex;
+          swatch.style.color = foreground.hex;
+          swatch.setAttribute(
+            "aria-label",
+            `${color.name}, ${color.hex}, with ${foreground.name.toLowerCase()}: ${ratio.toFixed(2)} to 1, ${passes ? "passes" : "fails"} WCAG AA for ${group.standardName}`
+          );
+          swatch.innerHTML = `
+            <span class="swatch-content" aria-hidden="true">
+              <span class="swatch-name">${color.name}</span>
+              <span class="swatch-hex">${color.hex}</span>
+            </span>
+            <span class="status" aria-hidden="true">Fails AA</span>
+          `;
+          grid.appendChild(swatch);
+        });
+
+        section.append(heading, grid);
+        groupContainer.appendChild(section);
+      });
+
+      matrix.appendChild(groupContainer);
+    });
+  </script>
+</body>
+</html>
